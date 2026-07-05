@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÖzgürQMS</title>
+
+<style>
+body { font-family: Arial; margin:0; background:#f4f6f9; }
+
+header {
+  background:#1f4b99; color:white;
+  padding:15px; display:flex; justify-content:space-between;
+}
+
+.container { padding:20px; }
+
+.card {
+  background:white; padding:15px;
+  margin:10px 0; border-radius:10px;
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+.login {
+  max-width:350px; margin:80px auto;
+  background:white; padding:20px;
+  border-radius:10px;
+}
+
+input, select, button {
+  width:100%; padding:10px; margin-top:10px;
+}
+
+button {
+  background:#1f4b99; color:white;
+  border:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div>ÖzgürQMS</div>
+<select onchange="setLang(this.value)">
+<option value="tr">TR</option>
+<option value="en">EN</option>
+</select>
+</header>
+
+<div id="app"></div>
+
+<script>
+let lang="tr";
+
+const t={
+tr:{login:"Giriş Yap",dash:"Gösterge Paneli",inst:"Kurum Seç"},
+en:{login:"Login",dash:"Dashboard",inst:"Select Institution"}
+};
+
+function setLang(l){lang=l;render();}
+
+function renderLogin(){
+document.getElementById("app").innerHTML=`
+<div class="login">
+<h3>${t[lang].login}</h3>
+
+<input placeholder="Kullanıcı">
+<input type="password" placeholder="Şifre">
+
+<select>
+<option>${t[lang].inst}</option>
+<option>ÖzgürQMS Demo Hastane</option>
+<option>Kurum B</option>
+</select>
+
+<button onclick="login()">${t[lang].login}</button>
+</div>`;
+}
+
+function login(){renderDash();}
+
+function renderDash(){
+document.getElementById("app").innerHTML=`
+<div class="container">
+<h2>${t[lang].dash}</h2>
+
+<div class="card">📊 SKS 160–194 Göstergeler</div>
+<div class="card">📈 Kurum Performans Analizi</div>
+<div class="card">⚠️ Uyarılar Paneli</div>
+</div>`;
+}
+
+function render(){renderLogin();}
+render();
+</script>
+
+</body>
+</html>
